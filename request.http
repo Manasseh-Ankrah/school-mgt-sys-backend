@@ -1,0 +1,26 @@
+POST http://localhost:5000/student/register HTTP/1.1
+content-type: application/json
+
+{
+        "first_name": "Dinah",
+        "last_name": "Naa",
+        "gender": "Female",
+        "date_of_birth": "2022-05-19",
+        "nationality": "American",
+        "address": "New York",
+        "student_email": "ofooley@gmail.com",
+        "telephone_no": "02999368891",
+        "reg_fees": "18000",
+        "course_title": "Networking",
+        "course_code": "12745",
+        "level": "NCC-Level 3",
+        "duration": "6 months",
+        "spon_fname": "Seth",
+        "spon_lname": "Solomon",
+        "spon_email": "seth90@gmail.com",
+        "spon_telephone": "0200028361870"
+}
+
+###
+
+GET http://localhost:5000/student/ HTTP/1.1
