@@ -16,6 +16,10 @@ app.use("/student", Student);
 // Port variable
 const PORT = process.env.PORT || 5000;
 
+app.get("/", (req, res) => {
+  res.send("School Management Backend is ACTIVE!!");
+});
+
 // Database Connection
 connectDB();
 
