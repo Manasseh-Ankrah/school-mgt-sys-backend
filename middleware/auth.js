@@ -10,7 +10,7 @@ const auth = (req, res, next) => {
         .json({ msg: "No authentication token, access denied" });
     const verified = jwt.verify(
       token,
-      "ef3ee8a527ee80718e822c040d24998b833aba902e26e3adce3b571786f9a39753f60cfa1917d26df04b03df8ca29cb851f3b81559782445d15e6a10ec630005"
+      ef3ee8a527ee80718e822c040d24998b833aba902e26e3adce3b571786f9a39753f60cfa1917d26df04b03df8ca29cb851f3b81559782445d15e6a10ec630005
     );
     if (!verified)
       return res

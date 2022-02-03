@@ -15,9 +15,9 @@ app.use(express.json());
 app.use("/admin", Admin);
 app.use("/student", Student);
 
-// app.get("/", (req, res) => {
-//   res.send("School Management Backend is ACTIVE!!");
-// });
+app.get("/", (req, res) => {
+  res.send("School Management Backend is ACTIVE!!");
+});
 
 // Database Connection
 connectDB();
