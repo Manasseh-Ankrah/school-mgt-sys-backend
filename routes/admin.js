@@ -106,10 +106,13 @@ router.post("/tokenIsValid", async (req, res) => {
   try {
     const token = req.header("x-auth-token");
     if (!token) return res.json(false);
-    const verified = jwt.verify(token, process.env.JWT_SECRET);
-    if (!verified) return res.json(false);
+    const verified = jwt.verify(
+      token,
+      "ef3ee8a527ee80718e822c040d24998b833aba902e26e3adce3b571786f9a39753f60cfa1917d26df04b03df8ca29cb851f3b81559782445d15e6a10ec630005"
+    );
+    if (!verified) return res.json({ value: false });
     const admin = await Admin.findById(verified.id);
-    if (!admin) return res.json(false);
+    if (!admin) return res.json({ value: false });
     return res.json(true);
   } catch (err) {
     res.status(500).json({ err });
