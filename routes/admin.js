@@ -88,7 +88,10 @@ router.post("/login", async (req, res) => {
         .json({ msg: "No account with this email has been registered." });
     const isMatch = await bycrypt.compare(password, admin.password);
     if (!isMatch) return res.status(400).json({ msg: "Invalid credentials." });
-    const token = jwt.sign({ id: admin._id }, process.env.JWT_SECRET);
+    const token = jwt.sign(
+      { id: admin._id },
+      "ef3ee8a527ee80718e822c040d24998b833aba902e26e3adce3b571786f9a39753f60cfa1917d26df04b03df8ca29cb851f3b81559782445d15e6a10ec630005"
+    );
     res.json({
       token,
       admin: { id: admin._id, displayName: admin.displayName },

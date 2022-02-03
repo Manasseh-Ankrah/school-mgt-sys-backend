@@ -1,14 +1,14 @@
-POST http://localhost:5000/student/register HTTP/1.1
+POST https://school-mgt-server.herokuapp.com/student/register HTTP/1.1
 content-type: application/json
 
 {
-        "first_name": "Dinah",
-        "last_name": "Naa",
+        "first_name": "Man",
+        "last_name": "Ankrah",
         "gender": "Female",
         "date_of_birth": "2022-05-19",
         "nationality": "American",
         "address": "New York",
-        "student_email": "ofooley@gmail.com",
+        "student_email": "many@gmail.com",
         "telephone_no": "02999368891",
         "reg_fees": "18000",
         "course_title": "Networking",
@@ -17,10 +17,19 @@ content-type: application/json
         "duration": "6 months",
         "spon_fname": "Seth",
         "spon_lname": "Solomon",
-        "spon_email": "seth90@gmail.com",
+        "spon_email": "se0@gmail.com",
         "spon_telephone": "0200028361870"
 }
 
 ###
 
-GET http://localhost:5000/student/ HTTP/1.1
+GET https://school-mgt-server.herokuapp.com/admin/tokenIsValid HTTP/1.1
+
+
+###
+POST https://school-mgt-server.herokuapp.com/admin/login HTTP/1.1
+content-type: application/json
+
+{ "email":"solomonankrah24@gmail.com",
+  "password":"12345" 
+ }
