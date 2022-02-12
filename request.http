@@ -1,24 +1,64 @@
-POST https://school-mgt-server.herokuapp.com/student/register HTTP/1.1
+# POST http://localhost:5000/student/register HTTP/1.1
+# content-type: application/json
+
+# {
+#         "first_name": "Man",
+#         "last_name": "Ankrah",
+#         "gender": "Female",
+#         "date_of_birth": "2022-05-19",
+#         "nationality": "American",
+#         "address": "New York",
+#         "student_email": "233postman@gmail.com",
+#         "telephone_no": "02999368891",
+#         "reg_fees": "18000",
+#         "course_title": "Networking",
+#         "course_code": "12745",
+#         "level": "NCC-Level 3",
+#         "duration": "6 months",
+#         "spon_fname": "Seth",
+#         "spon_lname": "Solomon",
+#         "spon_email": "postman@gmail.com",
+#         "spon_telephone": "0200028361870"
+}
+
+###
+POST http://localhost:5000/staff/register HTTP/1.1
 content-type: application/json
 
 {
-        "first_name": "Man",
-        "last_name": "Ankrah",
-        "gender": "Female",
-        "date_of_birth": "2022-05-19",
-        "nationality": "American",
+        "first_name": "Dinah",
+        "last_name": "Ofooley",
+        "gender": "Male",
+        "date_of_birth": "1995-05-19",
+        "nationality": "Cnadian",
         "address": "New York",
-        "student_email": "many@gmail.com",
+        "staff_email": "ofooley@gmail.com",
         "telephone_no": "02999368891",
-        "reg_fees": "18000",
-        "course_title": "Networking",
-        "course_code": "12745",
-        "level": "NCC-Level 3",
-        "duration": "6 months",
-        "spon_fname": "Seth",
-        "spon_lname": "Solomon",
-        "spon_email": "se0@gmail.com",
-        "spon_telephone": "0200028361870"
+        "role": "Administrator",
+        "qualification": "Masters",
+        "experience": "1 yr",
+        "salary": "7500"
+
+}
+
+###
+POST http://localhost:5000/course/register HTTP/1.1
+content-type: application/json
+
+{
+        "course": "Database",
+        "course_category": "Science",
+        "course_code": "500260"
+}
+
+###
+POST http://localhost:5000/event/register HTTP/1.1
+content-type: application/json
+
+{
+        "event": "Graduation Day",
+        "eventDate": "2020/09/70",
+        "completed": "true"
 }
 
 ###

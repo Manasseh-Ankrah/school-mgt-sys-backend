@@ -1,12 +1,12 @@
 const mongoose = require("mongoose");
 
-const studentSchema = new mongoose.Schema({
+const staffSchema = new mongoose.Schema({
   // Biodata section
-  fName: {
+  first_name: {
     type: String,
     required: true,
   },
-  lName: {
+  last_name: {
     type: String,
     required: true,
   },
@@ -14,7 +14,7 @@ const studentSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  date: {
+  date_of_birth: {
     type: String,
   },
   nationality: {
@@ -25,55 +25,32 @@ const studentSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  email: {
+  staff_email: {
     type: String,
     required: true,
-    // unique: true,
+    unique: true,
   },
-  telephone: {
-    type: Number,
-    required: true,
-  },
-  regFees: {
+  telephone_no: {
     type: Number,
     required: true,
   },
   // Course section
-  courseTitle: {
+  role: {
     type: String,
     required: true,
   },
-  courseCode: {
-    type: Number,
-    required: true,
-    maxlength: 6,
-  },
-  level: {
+  qualification: {
     type: String,
     required: true,
   },
-  duration: {
+  experience: {
     type: String,
     required: true,
   },
-  // Sponsor section
-  sponsorFName: {
+  salary: {
     type: String,
-    required: true,
-  },
-  sponsorLName: {
-    type: String,
-    required: true,
-  },
-  sponsorEmail: {
-    type: String,
-    required: true,
-    // unique: true,
-  },
-  sponsorTelephone: {
-    type: Number,
     required: true,
   },
 });
 
-module.exports = Student = mongoose.model("student", studentSchema);
+module.exports = Staff = mongoose.model("staff", staffSchema);
