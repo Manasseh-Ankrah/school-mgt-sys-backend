@@ -2,16 +2,16 @@ const express = require("express");
 const mongoose = require("mongoose");
 // const bycrypt = require("bcrypt");
 const router = express.Router();
-const Event = require("../models/event.model");
+const FeeSetup = require("../models/fee_setup.model");
 // const auth = require("../middleware/auth");
 // const jwt = require("jsonwebtoken");
 require("dotenv").config();
 
 
-// Fetching all events
+// Fetching all FeeSetup
 router.get("/", (req, res) => {
     try {
-      Event.find((err, data) => {
+      FeeSetup.find((err, data) => {
         if (err) {
           res.status(500).send(err);
         } else {
@@ -23,32 +23,28 @@ router.get("/", (req, res) => {
     }
   });
 
-// Creating a new Event
+// Creating a new FeeSetup
 router.post("/register", async (req, res) => {
-  // console.log(req.body);
   try {
     const {
-        event,
-        eventDate, 
-        completed,
+      level,
+      amount,
     } = req.body;
     if (
-      !event ||
-      !eventDate
+      !level ||
+      !amount
     ) {
-      return res.status(400).json({ msg: "Not all fields have been entered for completed" });
+      return res.status(400).json({ msg: "Not all fields have been entered." });
     } else {
-
-      // Register a new Event in the database, if the above errors do not occur!!!!!!!
-      const newEvent = new Event({
-        event: event,
-        eventDate: eventDate,
-        completed: completed
+      // Register a new FeeSetup in the database, if the above errors do not occur!!!!!!!
+      const newFeeSetup = new FeeSetup({
+        level: level,
+        amount: amount
       });
 
-      const saveEvent = await newEvent
+      const saveCourse = await newFeeSetup
         .save()
-        .then((newEvent) => res.json(newEvent))
+        .then((newFeeSetup) => res.json(newFeeSetup))
         .catch((err) => res.status(400).json("Error: " + err));
     }
   } catch (err) {
@@ -70,42 +66,44 @@ router.post("/register", async (req, res) => {
 // });
 
 // Staff Delete Request
-router.delete("/:eventId", async (req, res) => {
+router.delete("/:course_Id", async (req, res) => {
   try {
-    const getEvent = await Event.findById(req.params.eventId);
-    if (!getEvent) {
-      return res.status(404).json({ msg: "Event not found" });
+    const getCourse = await FeeSetup.findById(req.params.course_Id);
+    if (!getCourse) {
+      return res.status(404).json({ msg: "FeeSetup not found" });
     }
-    await getEvent.remove();
+    await getCourse.remove();
 
-    res.status(200).send("Event deleted Successfully");
+    res.status(200).send("FeeSetup deleted Successfully");
   } catch (error) {
     console.error(error.message);
     if (error.kind === "ObjectId") {
-      return res.status(404).json({ msg: "Event not found" });
+      return res.status(404).json({ msg: "FeeSetup not found" });
     }
-    res.status(500).send("Unable to delete Event");
+    res.status(500).send("Unable to delete FeeSetup");
   }
 });
 
-//Update Course
+//Update FeeSetup
 router.patch(
-  "/:event_id",
+  "/:course_id",
   async (req, res) => {
-    console.log(req.body.completed);
+    // console.log(req.params.course_id);
     try {
-      const updatedEvent = await Event.updateOne(
-        { _id: req.params.event_id },
+      const updatedCourse = await FeeSetup.updateMany(
+        { _id: req.params.course_id },
         {
           $set: {
-            completed: req.body.completed,
+            level: req.body.level,
+            amount: req.body.amount,
+            // imgUrl: req.body.imgUrl
           },
         }
       );
-      res.status(200).send("Event updated Successfully");
+      res.status(200).send("FeeSetup updated Successfully");
     } catch (error) {
       console.error(error.message);
-      res.status(500).send("Unable to update Event");
+      res.status(500).send("Unable to update FeeSetup information");
     }
   }
 );

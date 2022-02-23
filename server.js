@@ -6,6 +6,7 @@ const Admin = require("./routes/admin");
 const Student = require("./routes/student");
 const Staff = require("./routes/staff");
 const Course = require("./routes/course");
+const FeeSetup = require("./routes/fee_setup");
 // const Fees = require("./routes/fees");
 const Event = require("./routes/event");
 const app = express();
@@ -20,6 +21,7 @@ app.use("/admin", Admin);
 app.use("/student", Student);
 app.use("/staff", Staff);
 app.use("/course", Course);
+app.use("/fee_setup", FeeSetup);
 app.use("/event", Event);
 // app.use("/fees", Fees);
 

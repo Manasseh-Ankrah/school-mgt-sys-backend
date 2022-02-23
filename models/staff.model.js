@@ -1,12 +1,11 @@
 const mongoose = require("mongoose");
 
 const staffSchema = new mongoose.Schema({
-  // Biodata section
-  first_name: {
+  fName: {
     type: String,
     required: true,
   },
-  last_name: {
+  lName: {
     type: String,
     required: true,
   },
@@ -14,7 +13,7 @@ const staffSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  date_of_birth: {
+  date: {
     type: String,
   },
   nationality: {
@@ -25,12 +24,12 @@ const staffSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  staff_email: {
+  email: {
     type: String,
     required: true,
     unique: true,
   },
-  telephone_no: {
+  telephone: {
     type: Number,
     required: true,
   },

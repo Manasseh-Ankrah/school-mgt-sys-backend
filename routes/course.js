@@ -27,12 +27,12 @@ router.get("/", (req, res) => {
 router.post("/register", async (req, res) => {
   try {
     const {
-      course,
+      courseTitle,
       courseCategory,
       courseCode
     } = req.body;
     if (
-      !course ||
+      !courseTitle ||
       !courseCategory ||
       !courseCode
     ) {
@@ -40,14 +40,14 @@ router.post("/register", async (req, res) => {
     } else {
       // Register a new Course in the database, if the above errors do not occur!!!!!!!
       const newCourse = new Course({
-        course: course,
+        courseTitle: courseTitle,
         courseCategory: courseCategory,
         courseCode: courseCode
       });
 
       const saveCourse = await newCourse
         .save()
-        .then(() => res.json("New Course Registered !!"))
+        .then((newCourse) => res.json(newCourse))
         .catch((err) => res.status(400).json("Error: " + err));
     }
   } catch (err) {
@@ -69,17 +69,15 @@ router.post("/register", async (req, res) => {
 // });
 
 // Staff Delete Request
-router.delete("/:courseId", async (req, res) => {
+router.delete("/:course_Id", async (req, res) => {
   try {
-    const getCourse = await Course.findById(req.params.courseId);
+    const getCourse = await Course.findById(req.params.course_Id);
     if (!getCourse) {
       return res.status(404).json({ msg: "Course not found" });
     }
     await getCourse.remove();
 
-    // HINT !!!!!!
-    // Why do I have to send the deleted data in my response instead of the updated Course list ???????
-    res.json(getCourse);
+    res.status(200).send("Course deleted Successfully");
   } catch (error) {
     console.error(error.message);
     if (error.kind === "ObjectId") {
@@ -89,30 +87,28 @@ router.delete("/:courseId", async (req, res) => {
   }
 });
 
-//Update Staff
-// router.patch(
-//   "/:student_id/:first_name/:last_name/:level/course",
-//   async (req, res) => {
-//     console.log(req.params.first_name);
-
-//     try {
-//       const updatedStudent = await Student.updateMany(
-//         { _id: req.params.student_id },
-//         {
-//           $set: {
-//             first_name: req.body.first_name,
-//             last_name: req.body.last_name,
-//             level: req.body.level,
-//             course_title: req.body.course_title,
-//           },
-//         }
-//       );
-//       res.json(updatedStudent);
-//     } catch (error) {
-//       console.error(error.message);
-//       res.status(500).send("unable to update Student information");
-//     }
-//   }
-// );
+//Update Course
+router.patch(
+  "/:course_id",
+  async (req, res) => {
+    // console.log(req.params.course_id);
+    try {
+      const updatedCourse = await Course.updateMany(
+        { _id: req.params.course_id },
+        {
+          $set: {
+            courseTitle: req.body.courseTitle,
+            courseCategory: req.body.courseCategory,
+            // imgUrl: req.body.imgUrl
+          },
+        }
+      );
+      res.status(200).send("Course updated Successfully");
+    } catch (error) {
+      console.error(error.message);
+      res.status(500).send("Unable to update Course information");
+    }
+  }
+);
 
 module.exports = router;

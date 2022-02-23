@@ -27,47 +27,47 @@ router.get("/", (req, res) => {
 router.post("/register", async (req, res) => {
   try {
     const {
-      first_name,
-      last_name,
+      fName,
+      lName,
       gender,
-      date_of_birth,
+      date,
       nationality,
       address,
-      staff_email,
-      telephone_no,
+      email,
+      telephone,
       role,
       qualification,
       experience,
       salary,
     } = req.body;
     if (
-      !first_name ||
-      !last_name ||
+      !fName ||
+      !lName ||
       !gender ||
-      !date_of_birth ||
+      !date ||
       !nationality ||
       !address ||
-      !staff_email ||
-      !telephone_no ||
+      !email ||
+      !telephone ||
       !role ||
       !qualification ||
       !experience ||
       !salary
     ) {
       return res.status(400).json({ msg: "Not all fields have been entered." });
-    } else if (!staff_email.includes("@")) {
+    } else if (!email.includes("@")) {
       return res.status(400).json({ msg: "Enter a valid email for Staff" });
     } else {
       // Register a new Staff in the database, if the above errors do not occur!!!!!!!
       const newStaff = new Staff({
-        first_name: first_name,
-        last_name: last_name,
+        fName: fName,
+        lName: lName,
         gender: gender,
-        date_of_birth: date_of_birth,
+        date: date,
         nationality: nationality,
         address: address,
-        staff_email: staff_email,
-        telephone_no: telephone_no,
+        email: email,
+        telephone: telephone,
         role: role,
         qualification: qualification,
         experience: experience,
@@ -106,9 +106,7 @@ router.delete("/:staffId", async (req, res) => {
     }
     await getStaff.remove();
 
-    // HINT !!!!!!
-    // Why do I have to send the deleted data in my response instead of the updated Staff list ???????
-    res.json(getStaff);
+    res.status(200).send("Student deleted Successfully");
   } catch (error) {
     console.error(error.message);
     if (error.kind === "ObjectId") {
@@ -119,29 +117,30 @@ router.delete("/:staffId", async (req, res) => {
 });
 
 //Update Staff
-// router.patch(
-//   "/:student_id/:first_name/:last_name/:level/course",
-//   async (req, res) => {
-//     console.log(req.params.first_name);
+router.patch(
+  "/:staff_id",
+  async (req, res) => {
+    console.log(req.params.fName);
 
-//     try {
-//       const updatedStudent = await Student.updateMany(
-//         { _id: req.params.student_id },
-//         {
-//           $set: {
-//             first_name: req.body.first_name,
-//             last_name: req.body.last_name,
-//             level: req.body.level,
-//             course_title: req.body.course_title,
-//           },
-//         }
-//       );
-//       res.json(updatedStudent);
-//     } catch (error) {
-//       console.error(error.message);
-//       res.status(500).send("unable to update Student information");
-//     }
-//   }
-// );
+    try {
+      const updatedStaff = await Staff.updateMany(
+        { _id: req.params.staff_id },
+        {
+          $set: {
+            fName: req.body.fName,
+            lName: req.body.lName,
+            qualification: req.body.qualification,
+            salary: req.body.salary,
+            // imgUrl: req.body.imgUrl
+          },
+        }
+      );
+      res.json(updatedStaff);
+    } catch (error) {
+      console.error(error.message);
+      res.status(500).send("unable to update Student information");
+    }
+  }
+);
 
 module.exports = router;

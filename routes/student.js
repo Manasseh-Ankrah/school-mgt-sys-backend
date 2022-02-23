@@ -132,9 +132,7 @@ router.delete("/:studentId", async (req, res) => {
     }
     await getStudent.remove();
 
-    // HINT !!!!!!
-    // Why do I have to send the deleted data in my response instead of the updated Student list ???????
-    res.json(getStudent);
+    res.status(200).send("Student deleted Successfully");
   } catch (error) {
     console.error(error.message);
     if (error.kind === "ObjectId") {
@@ -146,7 +144,7 @@ router.delete("/:studentId", async (req, res) => {
 
 //Update Student
 router.patch(
-  "/:student_id/:fName/:lName/:level/course",
+  "/:student_id",
   async (req, res) => {
     console.log(req.params.fName);
 
@@ -159,14 +157,14 @@ router.patch(
             lName: req.body.lName,
             level: req.body.level,
             courseTitle: req.body.courseTitle,
+            // imgUrl: req.body.imgUrl
           },
         }
-        // imgUrl: req.body.imgUrl
       );
-      res.json(updatedStudent);
+      res.status(200).send("Student updated Successfully");
     } catch (error) {
       console.error(error.message);
-      res.status(500).send("unable to update Student information");
+      res.status(500).send("Unable to update Student information");
     }
   }
 );
